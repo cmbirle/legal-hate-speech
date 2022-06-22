@@ -1,5 +1,7 @@
-import sklearn
+import enum
+# import sklearn
 import sys
+import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import gensim
 from gensim.test.test_doc2vec import ConcatenatedDoc2Vec
@@ -7,7 +9,6 @@ from sklearn.naive_bayes import MultinomialNB, GaussianNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
-
 
  
 # Parameter: classify.py, Name des Modells, Trainingsdatei, Testdatei, Speicherordner (Ergebnisse und Modell)
@@ -22,38 +23,37 @@ if len(sys.argv) != 6:
     raise Exception(USAGE)
 else:
     modellname = sys.argv[1]
-    embedding = sys.argv[2]
+    features = sys.argv[2]
     train_path = sys.argv[3]
     test_path = sys.argv[4]
     save_at = sys.argv[5]
 
 
 # Daten laden
-with open(train_path, mode="r", encoding="utf-8") as in_train:
-    train_data = in_train.readlines()
-    train_data = [tweet.strip().split("\t") for tweet in train_data]
-    train_labels = [tweet[2] for tweet in train_data]
+def read_corpus(path):
+    with open(path, mode="r", encoding="utf-8") as inf:
+        data = inf.readlines()
+        data = [tweet.strip().split("\t") for tweet in data]
+        labels = [tweet[2] for tweet in data]
+    return (data, labels)
 
-with open(test_path, mode="r", encoding="utf-8") as in_test:
-    test_data = in_test.readlines()
-    test_data = [tweet.strip().split("\t") for tweet in test_data]
-    test_labels = [tweet[2] for tweet in test_data]
-
+train_data, train_labels = read_corpus(train_path)
+test_data, test_labels = read_corpus(test_path)
 
 
 # Preprocessing & Feature Extraction
 
-#vectorizer = TfidfVectorizer(lowercase=False)
-# Features:
-# 1. Zeichen-N-Gramme, char_wb: Unigramme innerhalb von Wortgrenzen (Leerzeichen)
-#vectorizer = CountVectorizer(analyzer='char_wb', ngram_range=(1, 1))
-#X = vectorizer.fit_transform(text_data)
 
+# Annotation konvertieren, Labels festlegen
 
-# Annotation konvertieren
-labels_vvh = ["KEINE", "VVH"]
-labels_gruppe = ["KeineGruppe", "Gruppe"]
-labels_handlung = ["KeineHandlung", "Handlung"]
+if set(train_labels) == {"NEG", "NOT"}:
+    labels = ["NEG", "NOT"]
+if set(train_labels) == {"KEINE", "VVH"}:
+    labels = ["KEINE", "VVH"]
+if set(train_labels) == {"KeineGruppe", "Gruppe"}:
+    labels = ["KeineGruppe", "Gruppe"]
+if set(train_labels) == {"KeineHandlung", "Handlung"}:
+    labels = ["KeineHandlung", "Handlung"]
 
 def labeling(label):
     if label == "VVH": return 1
@@ -69,13 +69,20 @@ tags_test = list(map(labeling, test_labels))
 
 
 # Bag of Words
-if embedding == "BOW":
-    X_train, X_test, y_train, y_test = [], [], [], []
-    True
+if features == "BOW":
+    # für Naive Bayes: binary=True
+    vectorizer = CountVectorizer(analyzer='char_wb', ngram_range=(1, 2), lowercase=True)
+    # Optional: stattdessen TfidfVectorizer
+    X = vectorizer.fit_transform(train_data)
+    X_train = X.toarray()
+    X_test = vectorizer.transform(test_data)
+    X_test = X_test.toarray()
+
+    X_train, X_test, y_train, y_test = X_train, X_test, train_labels, test_labels
 
 # doc2vec, s. https://radimrehurek.com/gensim/auto_examples/tutorials/run_doc2vec_lee.html
 
-# Preprocessing inkl. Tokenisierung
+# Preprocessing mit Gensim
 def read_corpus_gensim(datei, tokens_only=False):
     with open(datei, encoding="utf-8") as f:
         for i, line in enumerate(f):
@@ -90,11 +97,11 @@ def read_corpus_gensim(datei, tokens_only=False):
 
 # Vektoren berechnen; s. https://towardsdatascience.com/multi-class-text-classification-with-doc2vec-logistic-regression-9da9947b43f4;
 def feature_vectors(model, docs, tags):
-    targets, tags_final = zip(*[(tags[line], model.infer_vector(doc.words, epochs=20)) for line, doc in enumerate(docs)])
+    targets, tags_final = zip(*[(model.infer_vector(doc.words, epochs=20), tags[line]) for line, doc in enumerate(docs)])
     return targets, tags_final
 
 
-if embedding == "Doc2Vec":
+if features == "Doc2Vec":
     train_corpus = list(read_corpus_gensim(train_path))
     test_corpus = list(read_corpus_gensim(test_path))
 
@@ -111,28 +118,45 @@ if embedding == "Doc2Vec":
     # zur Kombination von DBOW und DM
     concat_model = ConcatenatedDoc2Vec([model_dbow, model_dm])
 
-    y_train, X_train = feature_vectors(concat_model, train_corpus, tags_train)
-    y_test, X_test = feature_vectors(concat_model, test_corpus, tags_test)
+    X_train, y_train = feature_vectors(concat_model, train_corpus, tags_train)
+    X_test, y_test = feature_vectors(concat_model, test_corpus, tags_test)
 
 
 
-model = GaussianNB()
+
 
 # Training
+
+# Standardmodell
+model = GaussianNB()
+
 if modellname == "GaussianNB":
     model = GaussianNB()
+elif modellname == "MultinomialNB"
+    model = MultinomialNB()
+elif modellname == "LogisticRegression":
+    model = LogisticRegression()
+elif modellname == "RandomForestClassifier":
+    model = RandomForestClassifier()
 
 model.fit(X_train,y_train)
 
 
 # Modell speichern
-
+with open(save_at+"/Modell.pkl", mode="w", encoding="utf-8") as outf:
+    outf.write(pickle.dumps(model))
 
 
 # Evaluation
 predicted = model.predict(X_test)
-print(metrics.classification_report(y_test, predicted, target_names=labels_gruppe))
+print(metrics.classification_report(y_test, predicted, target_names=labels))
 print(metrics.confusion_matrix(y_test, predicted))
 
 
 # Evaluationsergebnisse speichern
+with open(save_at+"/Ergebnisse.txt", mode="w", encoding="utf-8") as oute:
+    specs = "Modell: " + str(modelle) + "; gespeichert unter " + str(save_at) + "/Modell.pkl" + "; Features: " + str(features)
+    oute.write(specs+"\n")
+    oute.write(str(metrics.classification_report(y_test, predicted, target_names=labels)))
+    oute.write("\nConfusion Matrix\n")
+    oute.write(str(metrics.confusion_matrix(y_test, predicted))) 

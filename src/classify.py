@@ -11,22 +11,21 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 
  
-# Parameter: classify.py, Name des Modells, Trainingsdatei, Testdatei, Speicherordner (Ergebnisse und Modell)
+# Parameter: classify.py, Name des Modells, Trainingsdatei, Testdatei
 
 
-param = "classify.py Modell Features Trainingsdatei Testdatei Speicherordner\n"
+param = "classify.py Modell Features Trainingsdatei Testdatei\n"
 embeds = "Mögliche Features: BOW, Unigramme, Doc2Vec\n"
 modelle = "Mögliche Modelle: GaussianNB, MultinomialNB, LogisticRegression, RF\n"
 USAGE = "Korrekte Nutzung:\n"+param+embeds+modelle
 
-if len(sys.argv) != 6:
+if len(sys.argv) != 5:
     raise Exception(USAGE)
 else:
     modellname = sys.argv[1]
     features = sys.argv[2]
     train_path = sys.argv[3]
     test_path = sys.argv[4]
-    save_at = sys.argv[5]
 
 
 # Daten laden
@@ -132,7 +131,7 @@ model = GaussianNB()
 
 if modellname == "GaussianNB":
     model = GaussianNB()
-elif modellname == "MultinomialNB"
+elif modellname == "MultinomialNB":
     model = MultinomialNB()
 elif modellname == "LogisticRegression":
     model = LogisticRegression()
@@ -143,8 +142,8 @@ model.fit(X_train,y_train)
 
 
 # Modell speichern
-with open(save_at+"/Modell.pkl", mode="w", encoding="utf-8") as outf:
-    outf.write(pickle.dumps(model))
+#with open(save_at+"/Modell.pkl", mode="w", encoding="utf-8") as outf:
+#    outf.write(pickle.dumps(model))
 
 
 # Evaluation
@@ -154,9 +153,9 @@ print(metrics.confusion_matrix(y_test, predicted))
 
 
 # Evaluationsergebnisse speichern
-with open(save_at+"/Ergebnisse.txt", mode="w", encoding="utf-8") as oute:
-    specs = "Modell: " + str(modelle) + "; gespeichert unter " + str(save_at) + "/Modell.pkl" + "; Features: " + str(features)
-    oute.write(specs+"\n")
-    oute.write(str(metrics.classification_report(y_test, predicted, target_names=labels)))
-    oute.write("\nConfusion Matrix\n")
-    oute.write(str(metrics.confusion_matrix(y_test, predicted))) 
+#with open(save_at+"/Ergebnisse.txt", mode="w", encoding="utf-8") as oute:
+#    specs = "Modell: " + str(modelle) + "; gespeichert unter " + str(save_at) + "/Modell.pkl" + "; Features: " + str(features)
+#    oute.write(specs+"\n")
+#    oute.write(str(metrics.classification_report(y_test, predicted, target_names=labels)))
+#    oute.write("\nConfusion Matrix\n")
+#    oute.write(str(metrics.confusion_matrix(y_test, predicted))) 

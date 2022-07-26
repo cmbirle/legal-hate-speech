@@ -1,0 +1,27 @@
+['KeineGruppe', 'Nationalität', 'ethnische Herkunft / "Rasse"', 'Religion / Weltanschauung', 'Politische Einstellung', 'Geschlecht', 'Anderes Merkmal']
+
+('macro f1', 0.5385888756281629)
+
+('macro mcc', 0.5021808563434815)
+
+{'f1': 0.8165467625899281, 'rep': '              precision    recall  f1-score   support\n\n           0       0.75      0.68      0.72       377\n           1       0.79      0.84      0.82       539\n\n    accuracy                           0.78       916\n   macro avg       0.77      0.76      0.77       916\nweighted avg       0.78      0.78      0.78       916\n', 'confusion': array([[258, 119],
+       [ 85, 454]]), 'mcc': 0.5355047698827244}
+
+{'f1': 0.49350649350649356, 'rep': '              precision    recall  f1-score   support\n\n           0       0.96      1.00      0.98       860\n           1       0.90      0.34      0.49        56\n\n    accuracy                           0.96       916\n   macro avg       0.93      0.67      0.74       916\nweighted avg       0.96      0.96      0.95       916\n', 'confusion': array([[858,   2],
+       [ 37,  19]]), 'mcc': 0.539387148738998}
+
+{'f1': 0.0, 'rep': '              precision    recall  f1-score   support\n\n           0       0.99      1.00      0.99       906\n           1       0.00      0.00      0.00        10\n\n    accuracy                           0.99       916\n   macro avg       0.49      0.50      0.50       916\nweighted avg       0.98      0.99      0.98       916\n', 'confusion': array([[906,   0],
+       [ 10,   0]]), 'mcc': 0.0}
+
+{'f1': 0.717391304347826, 'rep': '              precision    recall  f1-score   support\n\n           0       0.97      1.00      0.99       860\n           1       0.92      0.59      0.72        56\n\n    accuracy                           0.97       916\n   macro avg       0.95      0.79      0.85       916\nweighted avg       0.97      0.97      0.97       916\n', 'confusion': array([[857,   3],
+       [ 23,  33]]), 'mcc': 0.7222674606108206}
+
+{'f1': 0.5809128630705394, 'rep': '              precision    recall  f1-score   support\n\n           0       0.91      0.97      0.94       769\n           1       0.74      0.48      0.58       147\n\n    accuracy                           0.89       916\n   macro avg       0.83      0.72      0.76       916\nweighted avg       0.88      0.89      0.88       916\n', 'confusion': array([[745,  24],
+       [ 77,  70]]), 'mcc': 0.5382246450720757}
+
+{'f1': 0.4117647058823529, 'rep': '              precision    recall  f1-score   support\n\n           0       0.96      0.99      0.98       868\n           1       0.70      0.29      0.41        48\n\n    accuracy                           0.96       916\n   macro avg       0.83      0.64      0.69       916\nweighted avg       0.95      0.96      0.95       916\n', 'confusion': array([[862,   6],
+       [ 34,  14]]), 'mcc': 0.43419183681589385}
+
+{'f1': 0.7500000000000001, 'rep': '              precision    recall  f1-score   support\n\n           0       0.96      1.00      0.98       825\n           1       0.93      0.63      0.75        91\n\n    accuracy                           0.96       916\n   macro avg       0.95      0.81      0.86       916\nweighted avg       0.96      0.96      0.95       916\n', 'confusion': array([[821,   4],
+       [ 34,  57]]), 'mcc': 0.7456901332838582}
+

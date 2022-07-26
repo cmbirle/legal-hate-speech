@@ -1,0 +1,5 @@
+['KEINE', 'VVH']
+
+{'f1': 0.29629629629629634, 'rep': '              precision    recall  f1-score   support\n\n           0       0.98      1.00      0.99       893\n           1       1.00      0.17      0.30        23\n\n    accuracy                           0.98       916\n   macro avg       0.99      0.59      0.64       916\nweighted avg       0.98      0.98      0.97       916\n', 'confusion': array([[893,   0],
+       [ 19,   4]]), 'mcc': 0.41266191376532896}
+

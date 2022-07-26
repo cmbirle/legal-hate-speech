@@ -1,0 +1,18 @@
+['KeineHandlung', 'Aufstachelung zu Hass', 'Aufforderung zu Gewalt- oder Willkürmaßnahmen', 'Angriff der Menschenwürde']
+
+('macro f1', 0.3397365519167521)
+
+('macro mcc', 0.22403028438606287)
+
+{'f1': 0.9866518353726362, 'rep': '              precision    recall  f1-score   support\n\n           0       0.83      0.18      0.29        28\n           1       0.97      1.00      0.99       888\n\n    accuracy                           0.97       916\n   macro avg       0.90      0.59      0.64       916\nweighted avg       0.97      0.97      0.97       916\n', 'confusion': array([[  5,  23],
+       [  1, 887]]), 'mcc': 0.37866370845446734}
+
+{'f1': 0.0, 'rep': '              precision    recall  f1-score   support\n\n           0       1.00      1.00      1.00       913\n           1       0.00      0.00      0.00         3\n\n    accuracy                           1.00       916\n   macro avg       0.50      0.50      0.50       916\nweighted avg       0.99      1.00      1.00       916\n', 'confusion': array([[913,   0],
+       [  3,   0]]), 'mcc': 0.0}
+
+{'f1': 0.19047619047619044, 'rep': '              precision    recall  f1-score   support\n\n           0       0.99      1.00      0.99       901\n           1       0.33      0.13      0.19        15\n\n    accuracy                           0.98       916\n   macro avg       0.66      0.56      0.59       916\nweighted avg       0.98      0.98      0.98       916\n', 'confusion': array([[897,   4],
+       [ 13,   2]]), 'mcc': 0.20278872482667676}
+
+{'f1': 0.18181818181818182, 'rep': '              precision    recall  f1-score   support\n\n           0       0.99      1.00      1.00       906\n           1       1.00      0.10      0.18        10\n\n    accuracy                           0.99       916\n   macro avg       1.00      0.55      0.59       916\nweighted avg       0.99      0.99      0.99       916\n', 'confusion': array([[906,   0],
+       [  9,   1]]), 'mcc': 0.3146687042631074}
+

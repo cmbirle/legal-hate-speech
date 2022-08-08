@@ -22,7 +22,7 @@ In diesem Repository finden sich die Notebooks zur Erstellung des Referenzdatens
 Die vier den Referenzdatensatz konstituierenden Korpora unterliegen unterschiedlichen Lizenzen; sie sind nicht alle frei verfügbar und können nicht hier hochgeladen werden. Der Ordner dient der Verständlichkeit des Arbeitsprozesses.
 
 #### Modelle
-Alle mit Logistischer Regression und auf BERT trainierten Modelle. Für Details s. [*src/classify.ipynb*](https://github.com/cmbirle/legal-hate-speech/src/classify.ipynb).
+Die mit logistischer Regression und auf BERT trainierten Modelle für das Gruppen- und Handlungsmerkmal. Für Details s. [*src/classify.ipynb*](https://github.com/cmbirle/legal-hate-speech/src/classify.ipynb).
 
 
 

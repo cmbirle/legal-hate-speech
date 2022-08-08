@@ -1,7 +1,14 @@
 # Entwicklung einer automatisierten Prüfung der Strafbarkeit von Hate Speech
 ## Klassifizierung des §130 StGB, Volksverhetzung, in Tweets
 
-Repository zur Bachelorarbeit [*Entwicklung einer automatisierten Prüfung der Strafbarkeit von Hate Speech*](https://github.com/cmbirle/legal-hate-speech/docs/HateSpeech-Bachelorarbeit-Birle.pdf) von Celia Birle, Universität Potsdam, verfasst im Rahmen der Tätigkeit bei Fraunhofer FOKUS
+Repository zur Bachelorarbeit [*Entwicklung einer automatisierten Prüfung der Strafbarkeit von Hate Speech*](https://github.com/cmbirle/legal-hate-speech/docs/HateSpeech-Bachelorarbeit-Birle.pdf) von Celia Birle, Universität Potsdam, verfasst im Rahmen der Tätigkeit als wissenschaftlich Hilfskraft bei Fraunhofer FOKUS
+
+
+Diese Bachelorarbeit untersucht, inwiefern es möglich ist, die Prüfung von Hate Speech auf ihre potentielle Strafbarkeit zu automatisieren. Dazu wurde beispielhaft für die Volksverhetzung (§ 130 StGB) ein Annotationsschema entwickelt. Ein Referenzdatensatz wurde aus bestehenden deutschsprachigen Datensätzen zusammengestellt und ein Ausschnitt dieser Daten anhand des neuen Annotationsschemas annotiert. Diese Daten dienten als Grundlage für das Training zweier Klassifikationsverfahren: Der logistischen Regression und dem Transfer Learning mit BERT. Anstatt Aussagen direkt als volksverhetzend zu klassifizieren, wurden separat zwei zentrale Tatbestandsmerkmale klassifiziert, die zusammen ein starkes Indiz dafür sind: Gruppe und Tathandlung. Durch eine Kombination dieser Teilklassifikation in einem Entscheidungsbaum konnte die Vorhersage 'volksverhetzend - Ja/Nein' getroffen werden.
+
+Die durch verschiedene Merkmale definierten Gruppen können erfolgreich klassifiziert werden; es wird mit BERT ein MCC-Wert zwischen 0.58 und 0.83 erreicht. Durch einen Mangel an Beispielen für die Tathandlungen können diese automatisiert jedoch mit einem MCC-Wert von 0.38 nur ungenügend erkannt werden. Die Kombination der Klassifikatoren der beiden Merkmale zur Klassifikation der Volksverhetzung als Ganzes verbessert die Ergebnisse der direkten Klassifikation nur geringfügig. Eine automatisierte Prüfung von Hate Speech auf ihre Strafbarkeit unter dem Tatbestand der Volksverhetzung ist grundsätzlich möglich, für bessere Ergebnisse wären jedoch noch mehr annotierte Daten notwendig.
+
+In diesem Repository finden sich die Notebooks zur Erstellung des Referenzdatensatzes und zur Klassifikation sowie die daraus resultierenden Modelle für die einzelnen Merkmale und zuletzt die Bachelorarbeit selbst.
 
 ### Struktur
 

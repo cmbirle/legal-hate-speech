@@ -1,7 +1,7 @@
 # Entwicklung einer automatisierten Prüfung der Strafbarkeit von Hate Speech
 ## Klassifizierung des §130 StGB, Volksverhetzung, in Tweets
 
-Repository zur Bachelorarbeit [*Entwicklung einer automatisierten Prüfung der Strafbarkeit von Hate Speech*](https://github.com/cmbirle/legal-hate-speech/docs/HateSpeech-Bachelorarbeit-Birle.pdf) von Celia Birle, Universität Potsdam, verfasst im Rahmen der Tätigkeit als wissenschaftlich Hilfskraft bei Fraunhofer FOKUS
+Repository zur Bachelorarbeit [*Entwicklung einer automatisierten Prüfung der Strafbarkeit von Hate Speech*](https://github.com/cmbirle/legal-hate-speech/blob/main/docs/Bachelorarbeit-HateSpeech-Birle-2022.pdf) von Celia Birle, Universität Potsdam, verfasst im Rahmen der Tätigkeit als wissenschaftlich Hilfskraft bei Fraunhofer FOKUS
 
 
 Diese Bachelorarbeit untersucht, inwiefern es möglich ist, die Prüfung von Hate Speech auf ihre potentielle Strafbarkeit zu automatisieren. Dazu wurde beispielhaft für die Volksverhetzung (§ 130 StGB) ein Annotationsschema entwickelt. Ein Referenzdatensatz wurde aus bestehenden deutschsprachigen Datensätzen zusammengestellt und ein Ausschnitt dieser Daten anhand des neuen Annotationsschemas annotiert. Diese Daten dienten als Grundlage für das Training zweier Klassifikationsverfahren: Der logistischen Regression und dem Transfer Learning mit BERT. Anstatt Aussagen direkt als volksverhetzend zu klassifizieren, wurden separat zwei zentrale Tatbestandsmerkmale klassifiziert, die zusammen ein starkes Indiz dafür sind: Gruppe und Tathandlung. Durch eine Kombination dieser Teilklassifikation in einem Entscheidungsbaum konnte die Vorhersage 'volksverhetzend - Ja/Nein' getroffen werden.
@@ -13,16 +13,16 @@ In diesem Repository finden sich die Notebooks zur Erstellung des Referenzdatens
 ### Struktur
 
 #### Notebooks
-1. [*src/create_refcorpus.ipynb*](https://github.com/cmbirle/legal-hate-speech/src/create_refcorpus.ipynb): Vereinheitlichung und Zusammenfügen der Korpora
-2. [*src/refcorp_annotation.ipynb*](https://github.com/cmbirle/legal-hate-speech/src/refcorp_annotation.ipynb): Hinzufügen und Prüfung der neuen Annotation der Volksverhetzung, § 130 StGB
-3. [*src/refcorp_visual.ipynb*](https://github.com/cmbirle/legal-hate-speech/src/refcorp_visual.ipynb): Darstellung der Verteilung der der Annotationslabels im Datensatz
-4. [*src/classify.ipynb*](https://github.com/cmbirle/legal-hate-speech/src/classify.ipynb): Klassifikationspipelines für die logistische Regression, das Transfer Learning mit BERT und den Entscheidungsbaum
+1. [*src/create_refcorpus.ipynb*](https://github.com/cmbirle/legal-hate-speech/blob/main/src/create_refcorpus.ipynb): Vereinheitlichung und Zusammenfügen der Korpora
+2. [*src/refcorp_annotation.ipynb*](https://github.com/cmbirle/legal-hate-speech/blob/main/src/refcorp_annotation.ipynb): Hinzufügen und Prüfung der neuen Annotation der Volksverhetzung, § 130 StGB
+3. [*src/refcorp_visual.ipynb*](https://github.com/cmbirle/legal-hate-speech/blob/main/src/refcorp_visual.ipynb): Darstellung der Verteilung der der Annotationslabels im Datensatz
+4. [*src/classify.ipynb*](https://github.com/cmbirle/legal-hate-speech/blob/main/src/classify.ipynb): Klassifikationspipelines für die logistische Regression, das Transfer Learning mit BERT und den Entscheidungsbaum
 
 #### Korpora
 Die vier den Referenzdatensatz konstituierenden Korpora unterliegen unterschiedlichen Lizenzen; sie sind nicht alle frei verfügbar und können nicht hier hochgeladen werden. Der Ordner dient der Verständlichkeit des Arbeitsprozesses.
 
 #### Modelle
-Die mit logistischer Regression und auf BERT trainierten Modelle für das Gruppen- und Handlungsmerkmal. Für Details s. [*src/classify.ipynb*](https://github.com/cmbirle/legal-hate-speech/src/classify.ipynb).
+Die mit logistischer Regression und auf BERT trainierten Modelle für das Gruppen- und Handlungsmerkmal. Für Details s. [*src/classify.ipynb*](https://github.com/cmbirle/legal-hate-speech/blob/main/src/classify.ipynb).
 
 
 
